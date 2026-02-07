@@ -159,16 +159,20 @@
     });
 
     function showFinalMessage() {
-      finalMessage.style.display = 'block';
-      finalMessage.innerHTML =
-        "You did it.<br><br>" +
-        "You completed every task, and you’ve proven yourself a worthy Valentine.<br><br>" +
-        "Your reward is now unlocked:<br><br>" +
-        "❤️ infinite love, wherever you are<br>" +
-        "❤️ unlimited virtual and real kisses, on your demand<br>" +
-        "❤️ sweet hugs at any hour, any day<br><br>" +
-        "And one Greek who is smiling way too much and way to silly right now.";
-    }
+  // Clear everything inside the card
+  const card = document.querySelector('.card');
+  card.innerHTML = `
+    <div class="calligraphy" style="font-size: 30px; padding: 20px;">
+      You did it.<br><br>
+      You completed every task, and you’ve proven yourself a worthy Valentine.<br><br>
+      Your reward is now unlocked:<br><br>
+      ❤️ infinite love, wherever you are<br>
+      ❤️ unlimited virtual and real kisses, on your demand<br>
+      ❤️ sweet hugs at any hour, any day<br><br>
+      And one Greek who is smiling way too much right now.
+    </div>
+  `;
+}
   </script>
 </body>
 </html>
