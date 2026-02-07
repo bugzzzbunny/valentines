@@ -9,19 +9,16 @@
 
   <style>
     body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-image: url('teddybears.png');
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
-}
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #ffe6f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
     .card {
       background: #fff;
       padding: 30px 40px;
@@ -81,13 +78,17 @@ background-repeat: no-repeat;
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>My lovely buttercup will you be my Valentine?</h1>
-    <p>I’ve run all the simulations. There’s only one correct answer.</p>
+  <div class="card" id="card">
+    <h1 id="question">My lovely buttercup will you be my Valentine?</h1>
+    <p id="subtext">I’ve run all the simulations. There’s only one correct answer.</p>
     <button id="yesBtn">Yes 💘</button>
     <button id="noBtn">No 🙅‍♀️</button>
 
-    <div id="message" class="calligraphy"></div>
+    <div id="message" class="calligraphy" style="display:none;"></div>
+
+    <button id="proceedBtn" style="display:none; margin-top:20px; background:#d81b60; color:white; font-size:18px; border-radius:20px; padding:10px 20px;">
+      Proceed to tasks ❤️
+    </button>
 
     <div id="taskContainer" style="display:none;">
       <p id="taskText"></p>
@@ -102,12 +103,16 @@ background-repeat: no-repeat;
   <script>
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
+    const question = document.getElementById('question');
+    const subtext = document.getElementById('subtext');
     const message = document.getElementById('message');
+    const proceedBtn = document.getElementById('proceedBtn');
     const taskContainer = document.getElementById('taskContainer');
     const taskText = document.getElementById('taskText');
     const doneTaskBtn = document.getElementById('doneTaskBtn');
     const finalMessage = document.getElementById('finalMessage');
     const showTask1Link = document.getElementById('showTask1Link');
+    const card = document.getElementById('card');
 
     const tasks = [
       "Task 1: Send me a song that matches your mood right now — I want to hear you through the music you choose.",
@@ -120,12 +125,27 @@ background-repeat: no-repeat;
     let currentTaskIndex = -1;
 
     yesBtn.addEventListener('click', () => {
+      // Hide question + buttons
+      question.style.display = 'none';
+      subtext.style.display = 'none';
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+
+      // Show romantic message
+      message.style.display = 'block';
       message.innerHTML =
         "Excellent choice.<br><br>" +
         "Just a warning… this entire experience was crafted by one dangerously in‑love Greek who refuses to play fair.<br><br>" +
         "Proceed with caution.<br>" +
-        "Complete each task to unlock your rewards — and trust me, they’re worth every step.";
-      
+        "When you're ready, continue to the tasks — and trust me, they’re worth every step.";
+
+      // Show proceed button
+      proceedBtn.style.display = 'inline-block';
+    });
+
+    proceedBtn.addEventListener('click', () => {
+      proceedBtn.style.display = 'none';
+      message.style.display = 'none';
       currentTaskIndex = 0;
       showTask(currentTaskIndex);
     });
@@ -162,20 +182,18 @@ background-repeat: no-repeat;
     });
 
     function showFinalMessage() {
-  // Clear everything inside the card
-  const card = document.querySelector('.card');
-  card.innerHTML = `
-    <div class="calligraphy" style="font-size: 30px; padding: 20px;">
-      You did it.<br><br>
-      You completed every task, and you’ve proven yourself a worthy Valentine.<br><br>
-      Your reward is now unlocked:<br><br>
-      ❤️ infinite love, wherever you are<br>
-      ❤️ unlimited virtual and real kisses, on your demand<br>
-      ❤️ sweet hugs at any hour, any day<br><br>
-      And one Greek who is smiling way too much and way too silly right now.
-    </div>
-  `;
-}
+      card.innerHTML = `
+        <div class="calligraphy" style="font-size: 30px; padding: 20px;">
+          You did it.<br><br>
+          You completed every task, and you’ve proven yourself a worthy Valentine.<br><br>
+          Your reward is now unlocked:<br><br>
+          ❤️ infinite love, wherever you are<br>
+          ❤️ unlimited virtual and real kisses, on your demand<br>
+          ❤️ sweet hugs at any hour, any day<br><br>
+          And one Greek who is smiling way too much and way too silly right now.
+        </div>
+      `;
+    }
   </script>
 </body>
 </html>
