@@ -185,18 +185,42 @@
     });
 
     function showFinalMessage() {
-      card.innerHTML = `
-        <div class="calligraphy" style="font-size: 30px; padding: 20px;">
-          You did it!<br><br>
-          You completed every task, and you’ve proven yourself that you are still in love with me and a worthy Valentine.<br><br>
-          Your reward is now unlocked:<br><br>
-          ❤️ infinite love, wherever you are<br>
-          ❤️ unlimited virtual and real kisses, on your demand<br>
-          ❤️ sweet hugs at any hour, any day<br><br>
-          And one Greek who is smiling way too much and way too silly right now.
-        </div>
-      `;
-    }
+  card.innerHTML = `
+    <div class="calligraphy" style="font-size: 30px; padding: 20px;">
+      You did it!<br><br>
+      You completed every task, and you’ve proven yourself that you are still in love with me and a worthy Valentine.<br><br>
+      Your reward is now unlocked:<br><br>
+      ❤️ infinite love, wherever you are<br>
+      ❤️ unlimited virtual and real kisses, on your demand<br>
+      ❤️ sweet hugs at any hour, any day<br><br>
+      And one Greek who is smiling way too much and way too silly right now.<br><br>
+
+      <button id="closeAndRedirect"
+        style="
+          background:#d81b60;
+          color:white;
+          border:none;
+          padding:14px 28px;
+          font-size:22px;
+          border-radius:50px;
+          cursor:pointer;
+          margin-top:20px;
+          box-shadow:0 4px 10px rgba(0,0,0,0.2);
+        ">
+        ❤️ Click here to close me ❤️
+      </button>
+    </div>
+  `;
+
+  const closeBtn = document.getElementById('closeAndRedirect');
+  closeBtn.addEventListener('click', () => {
+    // Hide the card (feels like closing)
+    card.style.display = 'none';
+
+    // Redirect to YouTube
+    window.location.href = "https://www.youtube.com/watch?v=pOoDPwJg8xI&list=RDpOoDPwJg8xI&start_radio=1";
+  });
+}
   </script>
 </body>
 </html>
