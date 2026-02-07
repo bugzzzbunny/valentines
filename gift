@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will you be my Valentine?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #ffe6f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-bottom: 10px;
+      color: #d81b60;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 25px;
+      color: #555;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #yesBtn {
+      background: #d81b60;
+      color: white;
+    }
+    #noBtn {
+      background: #ccc;
+      color: #333;
+      position: relative;
+    }
+    #message {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #d81b60;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Will you be my Valentine?</h1>
+    <p>I’ve run all the simulations. There’s only one correct answer.</p>
+    <button id="yesBtn">Yes 💘</button>
+    <button id="noBtn">No 🙅‍♀️</button>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const message = document.getElementById('message');
+
+    yesBtn.addEventListener('click', () => {
+      message.textContent =
+        "Excellent choice. Reward unlocked: extra attention, priority hugs, and one dangerously smitten Greek.";
+    });
+
+    noBtn.addEventListener('mouseover', () => {
+      const offsetX = (Math.random() - 0.5) * 200;
+      const offsetY = (Math.random() - 0.5) * 100;
+      noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+  </script>
+</body>
+</html>
