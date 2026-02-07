@@ -12,7 +12,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
     }
     .card {
@@ -20,6 +20,7 @@
       padding: 30px 40px;
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 500px;
     }
     h1 {
       margin-bottom: 10px;
@@ -27,7 +28,7 @@
     }
     p {
       margin-top: 0;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       color: #555;
     }
     button {
@@ -47,10 +48,19 @@
       color: #333;
       position: relative;
     }
-    #message {
+    #message, #taskContainer, #finalMessage {
       margin-top: 20px;
-      font-weight: bold;
       color: #d81b60;
+    }
+    #taskText {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    #showTask1Link {
+      color: #d81b60;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -60,17 +70,48 @@
     <p>I’ve run all the simulations. There’s only one correct answer.</p>
     <button id="yesBtn">Yes 💘</button>
     <button id="noBtn">No 🙅‍♀️</button>
+
     <div id="message"></div>
+
+    <div id="taskContainer" style="display:none;">
+      <p id="taskText"></p>
+      <span id="showTask1Link" style="display:none;">If you forgot task 1, click here.</span>
+      <br>
+      <button id="doneTaskBtn">I’ve done this ✅</button>
+    </div>
+
+    <div id="finalMessage" style="display:none;"></div>
   </div>
 
   <script>
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const message = document.getElementById('message');
+    const taskContainer = document.getElementById('taskContainer');
+    const taskText = document.getElementById('taskText');
+    const doneTaskBtn = document.getElementById('doneTaskBtn');
+    const finalMessage = document.getElementById('finalMessage');
+    const showTask1Link = document.getElementById('showTask1Link');
+
+    const tasks = [
+      "Task 1: Send me a song that matches your mood right now — I want to hear you through the music you choose.",
+      "Task 2: Send me a voice message telling me a joke — bonus points if you make me laugh like an idiot.",
+      "Task 3: Send me a selfie with the face you make when you read my messages — don’t pretend you don’t have one.",
+      "Task 4: Send me a short video with any random object you choose — and tell me why this object made you think of me.",
+      "Task 5: Repeat Task 1. If you forgot it, click the link below."
+    ];
+
+    let currentTaskIndex = -1;
 
     yesBtn.addEventListener('click', () => {
-      message.textContent =
-        "Excellent choice. Reward unlocked: extra attention, priority hugs, and one dangerously smitten Greek.";
+      message.innerHTML =
+        "Excellent choice.<br><br>" +
+        "Just a warning… this entire experience was crafted by one dangerously in‑love Greek who refuses to play fair.<br><br>" +
+        "Proceed with caution.<br>" +
+        "Complete each task to unlock your rewards — and trust me, they’re worth every step.";
+      
+      currentTaskIndex = 0;
+      showTask(currentTaskIndex);
     });
 
     noBtn.addEventListener('mouseover', () => {
@@ -78,6 +119,43 @@
       const offsetY = (Math.random() - 0.5) * 100;
       noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
     });
+
+    function showTask(index) {
+      if (index < tasks.length) {
+        taskContainer.style.display = 'block';
+        taskText.textContent = tasks[index];
+
+        if (index === 4) {
+          showTask1Link.style.display = 'inline';
+        } else {
+          showTask1Link.style.display = 'none';
+        }
+      } else {
+        taskContainer.style.display = 'none';
+        showFinalMessage();
+      }
+    }
+
+    doneTaskBtn.addEventListener('click', () => {
+      currentTaskIndex++;
+      showTask(currentTaskIndex);
+    });
+
+    showTask1Link.addEventListener('click', () => {
+      alert(tasks[0]);
+    });
+
+    function showFinalMessage() {
+      finalMessage.style.display = 'block';
+      finalMessage.innerHTML =
+        "You did it.<br><br>" +
+        "You completed every task, and you’ve proven yourself a worthy Valentine.<br><br>" +
+        "Your reward is now unlocked:<br><br>" +
+        "❤️ infinite love, wherever you are<br>" +
+        "❤️ unlimited virtual and real kisses, on your demand<br>" +
+        "❤️ sweet hugs at any hour, any day<br><br>" +
+        "And one Greek who is smiling way too much right now.";
+    }
   </script>
 </body>
 </html>
